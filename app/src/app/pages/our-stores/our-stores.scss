@@ -1,0 +1,299 @@
+.main {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.search-container {
+  width: 80%;
+  max-width: 800px;
+  margin: 30px 0 20px 0;
+}
+
+.search-fieldset {
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 0;
+  margin: 0;
+  position: relative;
+}
+
+.search-legend {
+  padding: 0 8px;
+  margin-left: 12px;
+  font-size: 14px;
+  color: #666;
+  font-family: Arial, sans-serif;
+}
+
+.search-input-wrapper {
+  display: flex;
+  align-items: center;
+  padding: 8px 16px;
+  position: relative;
+}
+
+.search-input {
+  flex: 1;
+  border: none;
+  outline: none;
+  font-size: 16px;
+  color: #999;
+  font-family: Arial, sans-serif;
+  padding: 8px 0;
+
+  &::placeholder {
+    color: #999;
+  }
+
+  &:focus {
+    color: #333;
+  }
+}
+
+.search-button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #666;
+
+  &:hover {
+    color: #333;
+  }
+
+  svg {
+    width: 24px;
+    height: 24px;
+  }
+}
+
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: start;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 30px;
+  width: 80%;
+
+}
+
+.card {
+  -webkit-box-shadow: 0 0 4px 0 rgba(100, 100, 100, .25);
+  -moz-box-shadow: 0 0 4px 0 rgba(100, 100, 100, .25);
+  box-shadow: 0 0 4px 0 rgba(100, 100, 100, .25);
+  margin: 1em 0;
+  border-radius: 4px;
+  width: 31%;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-header {
+  padding: 16px 18px;
+  color: #444444;
+  background: #f5f5f5;
+  border-radius: 4px 4px 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+  h2.card-subtitle {
+    width: 75%;
+    margin-right: 4px;
+    color: var(--text-color1);
+    place-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    justify-content: space-between;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-size: 18px !important;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  span.badge.bg-primary {
+    color: #fff;
+    background-color: #004797;
+    padding: 5px 14px;
+    font-size: 14px;
+    border-radius: 30px;
+    border: 1px solid #004797;
+    align-self: center;
+  }
+
+  span.badge.bg-secundary {
+    color: #f00;
+    background-color: #fff;
+    padding: 5px 14px;
+    font-size: 14px;
+    border-radius: 30px;
+    border: 1px solid #ff0000;
+    align-self: center;
+  }
+}
+
+.card-body {
+  padding: 16px 15px 0 15px;
+  color: #444444;
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  justify-content: space-between;
+
+  .horario-tienda {
+    font-size: 14px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    font-family: Arial, sans-serif;
+    margin: 0 0 8px 0;
+  }
+
+  .accordion-button {
+    display: flex;
+    position: relative;
+    align-items: center;
+    cursor: pointer;
+    padding-bottom: 0;
+    width: fit-content;
+    margin-bottom: 16px;
+
+    .horario {
+      display: flex;
+      align-items: center;
+      margin: 0;
+      font-size: 14px;
+      gap: 6px;
+
+      font-family: Arial, sans-serif;
+      
+      i {
+        padding: 0 8px;
+        font-size: 16px;
+        margin: 0;
+        color: var(--text-color1);
+      }
+    }
+  }
+
+  .cont-info-card .collapse {
+    display: none;
+    position: absolute;
+    z-index: 1000;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    transform: translate(-16px, 0);
+    padding: 16px;
+    min-width: 280px;
+
+    .list-horario {
+      padding-left: 0;
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+      color: #444444;
+
+      li {
+        margin: 6px 0;
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .cont-info-card .collapse.active {
+    display: block;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .row {
+    margin: 0 -15px -16px -15px;
+
+    .btn-detail {
+      width: 50%;
+      flex: 1;
+    }
+
+    a {
+      color: #eb5b25;
+      background-color: transparent;
+      text-decoration: none;
+      font-family: Arial, sans-serif;
+
+      .btn-card {
+        padding: 12px 16px;
+        text-align: center;
+        background: #eb5b25;
+        color: #fff;
+        font-size: 14px;
+        border-radius: 0 0 0 4px;
+      }
+
+      .bl-d {
+        border-left: 1px dashed #fff;
+        border-radius: 0 0 4px 0;
+      }
+    }
+  }
+}
+
+.icono {
+  display: inline-flex;
+  align-items: center;
+  
+  img {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+  }
+}
+
+.arrow {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 4px;
+  
+  img {
+    width: 16px;
+    height: 16px;
+    vertical-align: middle;
+  }
+}
+
+
+/*@media (min-width: 1200px) {
+  .container {
+    width: 65%;
+  }
+}
+
+@media (min-width: 992px) {
+  .container {
+    width: 70;
+  }
+}
+
+@media (min-width: 768px) {
+  .container {
+    width: 80;
+  }
+}*/

@@ -1,0 +1,64 @@
+<header>
+  <div class="first-container">
+    <div class="first-center-container">
+      <div class="image-container">
+        <a routerLink="/">
+          <img src="/alkosto-logo-header.svg" alt="logo de alkosto" />
+        </a>
+      </div>
+      <div class="first-nav-container">
+        <nav class="top-navigation">
+          <ul>
+            <li class="special-link">
+              <i aria-hidden="true">
+                <!-- Inline SVG: rounded tag-like badge -->
+                <svg
+                  width="18"
+                  height="18"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg"
+                  role="img"
+                  aria-label="hiperofertas icon"
+                >
+                  <!-- tag shape -->
+                  <path d="M3 10 L10 3 L20 3 L21 4 L14 11 L14 21 L12 23 L3 14 Z" fill="#004797" />
+                  <!-- small hole/circle -->
+                  <circle cx="13.2" cy="6.8" r="1.1" fill="#fff" />
+                </svg>
+              </i>
+              <a routerLink="/">Hiperofertas</a>
+            </li>
+            <li>
+              <a routerLink="/">Venta: (601) 746 8001</a>
+            </li>
+            <li>
+              <a routerLink="/">Servicio: (601) 407 3033</a>
+            </li>
+            <li>
+              <a routerLink="/">Sigue tu pedido</a>
+            </li>
+            <li>
+              <a routerLink="/nuestra-compañia/tiendas">Nuestras tiendas</a>
+            </li>
+            <li>
+              <a routerLink="/catalog">Catálogo</a>
+            </li>
+            <li>
+              <a routerLink="/help-page">Ayuda</a>
+            </li>
+          </ul>
+        </nav>
+        <div class="finder-and-account-cart">
+          <app-search class="finder-first-section"></app-search>
+          <nav class="account_cart">
+            <app-my-account class="account_circle"></app-my-account>
+            <div class="separator"></div>
+            <app-shopping-cart></app-shopping-cart>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-catalog></app-catalog>
+</header>

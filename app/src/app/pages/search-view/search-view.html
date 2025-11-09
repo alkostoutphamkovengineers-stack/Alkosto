@@ -1,0 +1,231 @@
+<section class="search-view">
+  <div class="search-view__container">
+    <aside class="filters" aria-label="Filtros">
+      <h3>Filtrar por:</h3>
+
+      <div class="filter-group">
+        <h4>Categorías</h4>
+        <ul class="categories">
+          <li>Accesorios de Electrónica</li>
+          <li>Celulares</li>
+          <li>Juguetes</li>
+        </ul>
+      </div>
+
+      <div class="filter-group">
+        <h4>Marca</h4>
+        <input
+          type="text"
+          placeholder="Buscar por marca"
+          [(ngModel)]="brandQuery"
+          class="brand-search"
+        />
+        <ul class="brands">
+          @for (b of filteredBrands(); track $index) {
+          <li>
+            <label>
+              <input
+                type="checkbox"
+                [value]="b.id"
+                (change)="toggleBrand(b.id, $event)"
+                [checked]="isBrandSelected(b.id)"
+              />
+              {{ b.nombre }}</label
+            >
+            <span class="count">({{ brandsCount[b.nombre.toUpperCase()] || 0 }})</span>
+          </li>
+          }
+        </ul>
+        <a class="see-more" href="#">Ver más</a>
+      </div>
+
+      <div class="filter-group">
+        <h4>Disponibilidad</h4>
+        <label
+          ><input
+            type="checkbox"
+            (change)="toggleDisponibilidad($event)"
+            [checked]="disponibilidad()"
+          />
+          Disponible</label
+        >
+      </div>
+
+      <div class="filter-group">
+        <h4>Rango de precio</h4>
+        <ul class="price-ranges">
+          <li>
+            <label
+              ><input
+                type="radio"
+                name="price"
+                (change)="selectPriceRange('0-500000')"
+                [checked]="selectedPriceRange() === '0-500000'"
+              />
+              0 - 500.000</label
+            >
+          </li>
+          <li>
+            <label
+              ><input
+                type="radio"
+                name="price"
+                (change)="selectPriceRange('500001-1000000')"
+                [checked]="selectedPriceRange() === '500001-1000000'"
+              />
+              500.001 - 1.000.000</label
+            >
+          </li>
+          <li>
+            <label
+              ><input
+                type="radio"
+                name="price"
+                (change)="selectPriceRange('1000001-2000000')"
+                [checked]="selectedPriceRange() === '1000001-2000000'"
+              />
+              1.000.001 - 2.000.000</label
+            >
+          </li>
+          <li>
+            <label
+              ><input
+                type="radio"
+                name="price"
+                (change)="selectPriceRange('2000001-5000000')"
+                [checked]="selectedPriceRange() === '2000001-5000000'"
+              />
+              2.000.001 - 5.000.000</label
+            >
+          </li>
+          <li>
+            <label
+              ><input
+                type="radio"
+                name="price"
+                (change)="selectPriceRange('5000001-inf')"
+                [checked]="selectedPriceRange() === '5000001-inf'"
+              />
+              5.000.001 - ∞</label
+            >
+          </li>
+        </ul>
+      </div>
+    </aside>
+
+    <div class="results">
+      <header class="results__header">
+        <div class="results__left">
+          <h2>
+            Mostrando {{ visibleCount }} de {{ totalCount }} resultados en tu búsqueda "{{ query }}"
+          </h2>
+        </div>
+        <div class="results__right">
+          <label for="sort">Ordenar por</label>
+          <select id="sort" [(ngModel)]="sortBy">
+            <option value="relevance">Relevancia</option>
+            <option value="price-asc">Precio: menor a mayor</option>
+            <option value="price-desc">Precio: mayor a menor</option>
+          </select>
+        </div>
+      </header>
+
+      <section class="hero-banner" aria-hidden="false">
+        <div class="hero-left">
+          <div class="hero-left__inner">
+            <div class="tag">MOTOROLA</div>
+            <h3>Celular Edge 50 Fusion 256GB 5G Azul</h3>
+          </div>
+        </div>
+
+        <div class="hero-center">
+          <div class="price-bubble">
+            <small class="before">$2.299.050 Antes</small>
+            <span class="now">$949.050</span>
+          </div>
+          <div class="phone-image">
+            <img src="/img/publi.png" alt="Celular" />
+          </div>
+        </div>
+
+        <div class="hero-right">
+          <div class="ad-overlay">Especial de Computadores y Celulares</div>
+          <div class="discount-badge">58%<span>DESCUENTO</span></div>
+          <div class="cta">
+            <button class="btn-more">Ver más</button>
+          </div>
+        </div>
+      </section>
+
+      <section class="product-list-placeholder">
+        @if (refProductsFilter.isLoading()) {
+        <div class="loading-state">
+          <div class="loading-card">
+            <div class="loader" aria-hidden="true"></div>
+            <div class="loading-copy">
+              <h3>Cargando productos</h3>
+              <p>
+                Estamos obteniendo las mejores ofertas para ti. Esto no debería tomar mucho tiempo.
+              </p>
+            </div>
+          </div>
+        </div>
+        } @if (refProductsFilter.error()) {
+        <div class="error-state">
+          <div class="error-card">
+            <div class="error-icon">⚠️</div>
+            <div class="error-copy">
+              <h3>No pudimos cargar los productos</h3>
+              <p>
+                Ocurrió un error al obtener los datos. Revisa tu conexión o intenta recargar la
+                página.
+              </p>
+              <div class="error-actions">
+                <button class="btn-retry" onclick="location.reload()">Reintentar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        } @if (refProductsFilter.value()) { @for (item of productsFilter(); track $index) {
+        <div class="x">
+          <div class="y">
+            <h4 class="product-title">{{ item.nombre }}</h4>
+            <p class="rating">4.9 <span class="stars">★★★★★</span> <small>(18)</small></p>
+          </div>
+          <div>
+            <div class="product-card detailed">
+              <div class="product-card__left">
+                <div class="brand-tag">{{ item.marca.nombre }}</div>
+                <div class="product-card__media">
+                  <img [src]="item.imagen" [alt]="item.marca.nombre" />
+                </div>
+              </div>
+              <div class="product-card__center" (click)="viewDetail(item.id)">
+                <p class="product-specs">
+                  {{ item.descripcion }}
+                </p>
+                <a class="more-details" href="#">Ver más detalles</a>
+              </div>
+              <div class="product-card__right">
+                <div class="service-badges">
+                  <span class="badge purple">Seguro Gratis</span>
+                  <span class="badge red">0% Interés Davivienda</span>
+                </div>
+                <div class="price-block">
+                  <div class="final-price">
+                    {{ item.precioBase | currency : 'COP' : 'symbol' : '1.0-0' }}
+                    <small>Hoy</small>
+                  </div>
+                </div>
+                <button (click)="addToCart(item)" class="cart-btn">
+                  <img src="/img/carrito_cat.png" alt="carrito" />
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+        } }
+      </section>
+    </div>
+  </div>
+</section>

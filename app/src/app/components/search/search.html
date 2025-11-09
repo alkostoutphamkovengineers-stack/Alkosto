@@ -1,0 +1,99 @@
+<form action="" class="search-form" [class.open]="isOpen">
+  <i (click)="onSearchIcon()" role="button" tabindex="0"><img src="/search.svg" /></i>
+  <input
+    #searchInput
+    type="text"
+    name="query"
+    id="search-input"
+    placeholder="¿Qué buscas hoy?"
+    (focus)="onFocus()"
+    (input)="onInput($event)"
+    (keydown)="onKeydown($event)"
+  />
+
+  <!-- Overlay completo que contiene el recuadro azul y el panel blanco divididos -->
+  @if (isOpen) {
+  <div class="search-overlay">
+    <div class="overlay-blue"></div>
+
+    <div class="overlay-panel">
+      <div class="panel-inner">
+        <div class="left-col">
+          <h4>Lo más buscado</h4>
+          <div class="pills">
+            <button type="button" class="pill" *ngFor="let p of popular" (click)="selectPopular(p)">
+              {{ p }}
+            </button>
+          </div>
+        </div>
+
+        <div class="right-col">
+          @if (searchQuery()) {
+          <h4>Resultados</h4>
+
+          @if (refSearch.isLoading()) {
+          <div class="loading-state">
+            <div class="loading-card">
+              <div class="loader" aria-hidden="true"></div>
+              <div class="loading-copy">
+                <h3>Cargando productos</h3>
+                <p>
+                  Estamos obteniendo las mejores ofertas para ti. Esto no debería tomar mucho
+                  tiempo.
+                </p>
+              </div>
+            </div>
+          </div>
+          } @if (refSearch.error()) {
+          <div class="error-state">
+            <div class="error-card">
+              <div class="error-icon">⚠️</div>
+              <div class="error-copy">
+                <h3>No pudimos cargar los productos</h3>
+                <p>
+                  Ocurrió un error al obtener los datos. Revisa tu conexión o intenta recargar la
+                  página.
+                </p>
+                <div class="error-actions">
+                  <button class="btn-retry" onclick="location.reload()">Reintentar</button>
+                </div>
+              </div>
+            </div>
+          </div>
+          }
+
+          <div class="content">
+            @if (refSearch.value()) { @for (item of topResults(); track $index) {
+            <a class="x" (click)="viewDetail(item.id)">
+              <div class="product-card detailed">
+                <div class="product-card__left">
+                  <div class="product-card__media">
+                    <img
+                      [src]="item.imagen || '/img/placeholder.png'"
+                      [alt]="item.marca ? item.marca.nombre : item.nombre"
+                    />
+                  </div>
+                </div>
+                <div class="y">
+                  <h4 class="product-title">{{ item.nombre }}</h4>
+                  <p class="rating">4.9 <span class="stars">★★★★★</span> <small>(18)</small></p>
+                </div>
+                <div class="product-card__right">
+                  <div class="price-block">
+                    <div class="final-price">
+                      {{ item.precioBase | currency : 'COP' : 'symbol' : '1.0-0' }}
+                    </div>
+                  </div>
+                  <button class="cart-btn"><img src="/img/carrito_cat.png" alt="carrito" /></button>
+                </div>
+              </div>
+            </a>
+            } }
+          </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+  }
+</form>

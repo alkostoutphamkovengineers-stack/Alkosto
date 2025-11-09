@@ -1,0 +1,24 @@
+<div class="help-page container">
+  <nav class="breadcrumb">
+    <a class="home">Inicio</a>
+    <span class="sep">›</span>
+    <span class="current">Preguntas Frecuentes</span>
+  </nav>
+
+  <h1 class="title">Preguntas Frecuentes</h1>
+  <p class="intro">Te guiamos en el proceso de compra en línea.</p>
+
+  <div class="faq-list">
+    <div class="faq-item" *ngFor="let faq of faqs; let i = index" [class.open]="faq.open">
+      <div class="faq-head" (click)="toggle(i)">
+        <h3>{{ faq.question }}</h3>
+        <button class="chev">{{ faq.open ? '✕' : '▾' }}</button>
+      </div>
+      @if (faq.open) {
+      <div class="faq-body">
+        <div [innerHTML]="faq.answerHtml || faq.answer"></div>
+      </div>
+      }
+    </div>
+  </div>
+</div>

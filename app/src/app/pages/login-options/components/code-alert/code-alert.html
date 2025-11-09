@@ -1,0 +1,91 @@
+@if (isOpen()) {
+<div class="modal-overlay"></div>
+
+<div class="modal-card">
+  <div class="modal-header">
+    <h2>Escribe el código recibido</h2>
+  </div>
+
+  <div class="modal-body">
+    <p class="instruction">
+      Escribe el código recibido en tu {{ messageVerification() }} <b>{{  userAuthMethodAddress() }}</b>
+    </p>
+
+    <form [formGroup]="codeForm" (ngSubmit)="onSubmit()">
+      <div class="code-inputs" [class.error-active]="hasError">
+        <input
+          type="text"
+          maxlength="1"
+          formControlName="digit1"
+          (input)="onDigitInput($event, 1)"
+          (keydown)="onDigitKeydown($event, 1)"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          formControlName="digit2"
+          (input)="onDigitInput($event, 2)"
+          (keydown)="onDigitKeydown($event, 2)"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          formControlName="digit3"
+          (input)="onDigitInput($event, 3)"
+          (keydown)="onDigitKeydown($event, 3)"
+          autocomplete="off"
+        />
+        <span class="separator">-</span>
+        <input
+          type="text"
+          maxlength="1"
+          formControlName="digit4"
+          (input)="onDigitInput($event, 4)"
+          (keydown)="onDigitKeydown($event, 4)"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          formControlName="digit5"
+          (input)="onDigitInput($event, 5)"
+          (keydown)="onDigitKeydown($event, 5)"
+          autocomplete="off"
+        />
+        <input
+          type="text"
+          maxlength="1"
+          formControlName="digit6"
+          (input)="onDigitInput($event, 6)"
+          (keydown)="onDigitKeydown($event, 6)"
+          autocomplete="off"
+        />
+      </div>
+
+  @if (hasError) {
+  <p class="error-message">Por favor complete el campo.</p>
+  }
+
+  @if (verificationError()) {
+  <p class="error-message server">{{ verificationError() }}</p>
+  }
+
+      <div class="resend-section">
+        <button type="button" class="resend-btn" [disabled]="!canResend" (click)="resendCode()">
+          Reenviar código en
+          {{ countdown() > 0 ? '0:' + (countdown() < 10 ? '0' : '') + countdown() : '0:00' }}
+        </button>
+      </div>
+
+      <button type="submit" class="verify-btn" [disabled]="codeForm.invalid">
+        Verificar código
+      </button>
+    </form>
+
+    <a class="change-method" (click)="changeMethod()">Cambiar el método de verificación</a>
+  </div>
+</div>
+
+}

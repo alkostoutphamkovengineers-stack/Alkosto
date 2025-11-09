@@ -1,0 +1,68 @@
+@if (refProductsGorup.isLoading()) {
+<div class="loading-placeholder">Cargando productos…</div>
+} @if (refProductsGorup.error()) {
+<div class="error-placeholder">Error cargando productos</div>
+} @if (refProductsGorup.value()) { @for (category of productsGrop(); track $index) {
+<section class="category-section">
+  <div class="category-banner">
+    <div class="category-inner">
+      <h2 id="cat-{{ $index }}" class="category-name">{{ category.nombre }}</h2>
+    </div>
+  </div>
+
+  <div class="category-body">
+    <!-- Left: subcategory navigation -->
+    <aside class="subcategories-nav" aria-label="Subcategorías">
+      <h3 class="nav-title">Subcategorías</h3>
+      <ul class="subcat-list">
+        @for (sub of category.subcategorias; track $index) {
+        <li class="subcat-item" (click)="scrollToSubcategory($event, $index)" tabindex="0">
+          {{ sub.nombre }}
+        </li>
+        }
+      </ul>
+    </aside>
+
+    <!-- Right: content - each subcategory block with brand groups -->
+    <main class="category-content">
+      @for (sub of category.subcategorias; track $index) {
+      <div id="sub-{{ $index }}" class="subcategory-block">
+        <h4 class="subcategory-title">{{ sub.nombre }}</h4>
+
+        @for (marcaGroup of sub.marcas; track $index) {
+        <section class="brand-group">
+          <div class="brand-header">{{ marcaGroup.nombre }}</div>
+          <div class="brand-products">
+            @for (product of marcaGroup.productos; track $index) {
+            <a class="product-link" (click)="viewDetail(product.id)">
+              <div class="product-card detailed">
+                <div class="product-card__left">
+                  <div class="brand-tag">{{ product.marca.nombre }}</div>
+                  <div class="product-card__media">
+                    <img [src]="product.imagen" [alt]="product.marca.nombre" />
+                  </div>
+                </div>
+                <div class="y">
+                  <h4 class="product-title">{{ product.nombre }}</h4>
+                  <p class="rating">4.9 <span class="stars">★★★★★</span> <small>(18)</small></p>
+                </div>
+                <div class="product-card__right">
+                  <div class="price-block">
+                    <div class="final-price">
+                      {{ product.precioBase | currency : 'COP' : 'symbol' : '1.0-0' }}
+                    </div>
+                  </div>
+                  <button class="cart-btn"><img src="/img/carrito_cat.png" alt="carrito" /></button>
+                </div>
+              </div>
+            </a>
+            }
+          </div>
+        </section>
+        }
+      </div>
+      }
+    </main>
+  </div>
+</section>
+} }

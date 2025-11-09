@@ -1,0 +1,19 @@
+div {
+  display: flex;
+  align-items: start;
+  justify-content: center;
+  width: 100%;
+  min-height: 85vh;
+
+  main {
+    background-color: #fff;
+    background-repeat: no-repeat;
+    position: relative;
+    background-size: cover;
+    padding: 32px 24px;
+    max-width: 1440px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

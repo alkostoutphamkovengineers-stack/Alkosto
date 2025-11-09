@@ -1,0 +1,226 @@
+/* Styles for my-profile page */
+.my-profile {
+  --orange: #eb5b25;
+  --text: #22224a;
+  --muted: #7a7a7a;
+  --border: #e6e6e6;
+  --card-bg: #fff;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+  min-height: calc(80vh);
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    color: var(--orange);
+    font-weight: 600;
+    margin-left: 8px;
+
+    .home {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
+      background: rgba(235, 91, 37, 0.08);
+      border-radius: 6px;
+      color: var(--orange);
+      text-decoration: none;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 260px 1fr;
+    gap: 40px;
+    align-items: start;
+    margin-top: 18px;
+  }
+
+  .sidebar {
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 8px 0 0 8px;
+
+      li {
+        margin-bottom: 12px;
+
+        a {
+          display: flex;
+          gap: 12px;
+          align-items: center;
+          color: #333;
+          text-decoration: none;
+          padding: 10px 12px;
+          border-radius: 6px;
+          transition: background 0.15s ease, color 0.15s ease;
+
+          svg {
+            width: 20px;
+            height: 20px;
+            color: #666;
+            flex: 0 0 20px;
+          }
+
+          span {
+            font-size: 15px;
+            color: #333;
+          }
+        }
+
+        &.active a {
+          background: rgba(235, 91, 37, 0.06);
+          color: var(--orange);
+
+          svg {
+            color: var(--orange);
+          }
+        }
+      }
+    }
+  }
+
+  .content {
+    .banner {
+      background: linear-gradient(90deg, #2f2f9b 0%, #312f9b 100%);
+      color: #fff;
+      padding: 28px 36px;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+
+      h2 {
+        margin: 0;
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .watermark {
+        position: absolute;
+        right: -40px;
+        top: -20px;
+        width: 160px;
+        height: 160px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.06);
+        transform: rotate(15deg);
+      }
+    }
+
+    .cards {
+      margin-top: -20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+
+      .card {
+        background: var(--card-bg);
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        box-shadow: 0 2px 4px rgba(22, 24, 32, 0.03);
+        overflow: hidden;
+
+        header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          padding: 18px 20px;
+
+          h3 {
+            margin: 0;
+            color: #2f2f9b;
+            font-size: 16px;
+          }
+
+          .edit {
+            display: inline-flex;
+            gap: 8px;
+            align-items: center;
+            color: var(--orange);
+            text-decoration: none;
+            font-weight: 600;
+
+            svg {
+              width: 18px;
+              height: 18px;
+              color: var(--orange);
+            }
+          }
+        }
+
+        .card-body {
+          padding: 18px 20px 22px;
+
+          .row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 16px;
+            padding: 12px 0;
+
+            .label {
+              font-weight: 700;
+              color: #333;
+              margin-bottom: 6px;
+            }
+            .value {
+              color: var(--muted);
+              font-size: 15px;
+            }
+            .muted {
+              color: #9b9b9b;
+              font-size: 13px;
+              margin-top: 6px;
+            }
+
+            .actions {
+              width: 140px;
+              text-align: right;
+            }
+
+            .edit.small {
+              display: inline-flex;
+              gap: 8px;
+              align-items: center;
+              color: var(--orange);
+              text-decoration: none;
+              font-weight: 600;
+              font-size: 14px;
+
+              svg {
+                width: 16px;
+                height: 16px;
+                color: var(--orange);
+              }
+            }
+          }
+
+          hr {
+            border: none;
+            border-top: 1px solid #eee;
+            margin: 6px 0 6px;
+          }
+        }
+      }
+    }
+  }
+
+  /* Responsive */
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .sidebar {
+      order: 2;
+    }
+    .content {
+      order: 1;
+    }
+    .cards {
+      margin-top: 12px;
+    }
+  }
+}

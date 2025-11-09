@@ -1,0 +1,258 @@
+<div class="account" (click)="openOrCloseMenu()">
+  <img src="/account.svg" />
+  <span>{{ loginState.isLoggedIn() ? loginState.displayName() : 'Mi cuenta' }}</span>
+</div>
+
+<div class="triangle" [class.active]="stateMenu"></div>
+<div class="menu" [class.active]="stateMenu">
+  @if (loginState.isLoggedIn()) {
+  <div class="account-logged" (click)="closeMenu()">
+    <div class="user-header">
+      <h3>Bienvenido/{{ loginState.displayName() }}</h3>
+      <a class="logout-link" (click)="logout()">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <g
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+            <polyline points="16 17 21 12 16 7"></polyline>
+            <line x1="21" y1="12" x2="9" y2="12"></line>
+          </g>
+        </svg>
+        Cerrar sesión
+      </a>
+    </div>
+
+    <ul class="user-menu">
+      <li>
+        <a href="#">
+          <i class="icon user-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </g>
+            </svg>
+          </i>
+          <div>
+            <h5>Mi cuenta</h5>
+            <span>Aquí podrás consultar todos tus movimientos</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a routerLink="my-account/update-profile">
+          <i class="icon profile-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="3"></circle>
+                <path
+                  d="M12 1v6m0 6v6m5.6-13.6l-4.2 4.2m-2.8 2.8l-4.2 4.2m13.6-5.6h-6m-6 0H1m13.6 5.6l-4.2-4.2m-2.8-2.8l-4.2-4.2"
+                ></path>
+              </g>
+            </svg>
+          </i>
+          <div>
+            <h5>Mi Perfil</h5>
+            <span>Revisa y edita tus datos personales.</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="icon orders-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </g>
+            </svg>
+          </i>
+          <div>
+            <h5>Mis Pedidos</h5>
+            <span>Gestiona tus pedidos, devoluciones y fechas de entrega.</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="icon payment-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"></rect>
+                <line x1="1" y1="10" x2="23" y2="10"></line>
+              </g>
+            </svg>
+          </i>
+          <div>
+            <h5>Métodos de Pago</h5>
+            <span>Agrega y valida tus métodos de pago.</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="icon address-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                <circle cx="12" cy="10" r="3"></circle>
+              </g>
+            </svg>
+          </i>
+          <div>
+            <h5>Direcciones de envío</h5>
+            <span>Agrega, edita y/o elimina una dirección</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="icon favorites-icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"
+                ></path>
+              </g>
+            </svg>
+          </i>
+          <div>
+            <h5>Mi lista de Favoritos</h5>
+            <span>Guarda y revisa tus productos</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+  } @else {
+  <div class="account-form">
+    <h3>Ingresar o crear cuenta</h3>
+    <span class="span-info"
+      >Accede a tus datos personales, tus pedidos y solicita devoluciones:</span
+    >
+    <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+      <div class="form-field">
+        <label
+          for="email"
+          [class.error-active]="formError()"
+          [class.touch-active]="emailTouched() && !formError()"
+          >Correo electrónico</label
+        >
+        <div class="input-wrapper" [class.error-active]="formError()">
+          <input
+            type="email"
+            id="email"
+            name="email"
+            formControlName="email"
+            [class.error-active]="formError()"
+            (focus)="onEmailFocus()"
+            (blur)="onEmailBlur()"
+          />
+          <span class="error-icon" [class.error-active]="formError()">⚠</span>
+        </div>
+        <span class="error-message" [class.error-active]="formError()"
+          >El correo no es válido
+        </span>
+      </div>
+      <button class="button-primary" type="submit">Continuar</button>
+    </form>
+  </div>
+  }
+  <div class="account-nav">
+    <ul>
+      <li>
+        <a href="#">
+          <i class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <rect x="3" y="7" width="10" height="6" rx="1"></rect>
+                <path d="M13 10h3l3 3v3h-6"></path>
+                <circle cx="7" cy="18" r="2"></circle>
+                <circle cx="17" cy="18" r="2"></circle>
+              </g>
+            </svg>
+          </i>
+          <div>
+            <h5>Sigue tu pedido</h5>
+            <span>Revisa el estado actual de tu pedido.</span>
+          </div>
+        </a>
+      </li>
+      <li>
+        <a href="#">
+          <i class="icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M7 3h8l3 3v15H7z"></path>
+                <path d="M15 3v4h4"></path>
+                <path d="M12 10v6"></path>
+                <path d="M10.5 14.5L12 16l1.5-1.5"></path>
+              </g>
+            </svg>
+          </i>
+          <div>
+            <h5>Descarga tu factura</h5>
+            <span>Consulta y descarga tu factura.</span>
+          </div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</div>
+
+<div class="background-modal" [class.active]="stateMenu" (click)="closeMenu()"></div>

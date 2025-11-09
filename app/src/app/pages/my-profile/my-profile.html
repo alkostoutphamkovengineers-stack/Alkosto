@@ -1,0 +1,189 @@
+<section class="my-profile">
+  <div class="container">
+    <nav class="breadcrumb">
+      <a class="home" href="#" aria-label="Inicio">
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path
+            d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z"
+            fill="currentColor"
+          />
+        </svg>
+      </a>
+      <span>Mi cuenta</span>
+    </nav>
+
+    <div class="grid">
+      <aside class="sidebar" aria-label="Navegación de cuenta">
+        <ul>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 11.5L12 4l9 7.5V20a1 1 0 0 1-1 1h-5v-6H9v6H4a1 1 0 0 1-1-1z" />
+              </svg>
+              <span>Mi cuenta</span>
+            </a>
+          </li>
+          <li class="active">
+            <a routerLink="/my-account/update-profile">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="8" r="3" />
+                <path d="M5 20c1-4 6-6 7-6s6 2 7 6" />
+              </svg>
+              <span>Mi Perfil</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="7" width="18" height="11" rx="2" />
+                <path d="M3 7l9 6 9-6" />
+              </svg>
+              <span>Direcciones de envío</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 3h18v4H3z" />
+                <path d="M6 11h12l1 7H5z" />
+              </svg>
+              <span>Mis Pedidos</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="7" width="18" height="11" rx="2" />
+              </svg>
+              <span>Métodos de Pago</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M12 21s-6-4.35-9-7.1C1 10.9 4 6 8 6c2 0 3 1 4 2 1-1 2-2 4-2 4 0 7 4.9 5 7.9C18 16.65 12 21 12 21z"
+                />
+              </svg>
+              <span>Mi lista de Favoritos</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 12h18" />
+                <path d="M3 6h18" />
+                <path d="M3 18h18" />
+              </svg>
+              <span>Sigue tu pedido</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M3 6h18v11H3z" />
+                <path d="M7 10h6" />
+              </svg>
+              <span>Descarga tu factura</span>
+            </a>
+          </li>
+          <li>
+            <a href="#">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M16 17l5-5-5-5" />
+                <path d="M21 12H9" />
+              </svg>
+              <span>Cerrar Sesión</span>
+            </a>
+          </li>
+        </ul>
+      </aside>
+
+      <main class="content">
+        <div class="banner">
+          <h2>Mis datos</h2>
+          <div class="watermark" aria-hidden="true"></div>
+        </div>
+
+        <div class="cards">
+          <section class="card">
+            <header>
+              <h3>Información personal</h3>
+              <a class="edit" href="#" title="Editar">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M3 21v-3l11-11 3 3L6 21H3z" />
+                </svg>
+                Editar
+              </a>
+            </header>
+
+            <div class="card-body">
+              <div class="row">
+                <div>
+                  <div class="label">Nombre</div>
+                  <div class="value">{{ loginState.userName() }}</div>
+                  <div class="muted">Sin registrar</div>
+                </div>
+                <div class="actions">
+                  <!-- empty to align like screenshot -->
+                </div>
+              </div>
+
+              <hr />
+
+              <div class="row">
+                <div>
+                  <div class="label">Contraseña</div>
+                  <div class="value">********</div>
+                </div>
+                <div class="actions">
+                  <a class="edit small" routerLink="/my-account/update-password">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M3 21v-3l11-11 3 3L6 21H3z" />
+                    </svg>
+                    Cambiar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section class="card">
+            <header>
+              <h3>Información de contacto</h3>
+            </header>
+
+            <div class="card-body">
+              <div class="row">
+                <div>
+                  <div class="label">Correo electrónico</div>
+                  <div class="value">{{ loginState.userEmail() }}</div>
+                </div>
+                <div class="actions">
+                  <!-- placeholder -->
+                </div>
+              </div>
+
+              <hr />
+
+              <div class="row">
+                <div>
+                  <div class="label">Teléfono celular</div>
+                  <div class="value">{{ loginState.userPhone() }}</div>
+                </div>
+                <div class="actions">
+                  <a class="edit small" href="#">
+                    <svg viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M3 21v-3l11-11 3 3L6 21H3z" />
+                    </svg>
+                    Editar
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
+        </div>
+      </main>
+    </div>
+  </div>
+</section>

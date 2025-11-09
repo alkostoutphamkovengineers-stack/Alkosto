@@ -1,0 +1,81 @@
+<div class="main">
+	<!-- Buscador -->
+	<div class="search-container">
+		<fieldset class="search-fieldset">
+			<legend class="search-legend">Busca tu tienda</legend>
+			<div class="search-input-wrapper">
+				<input 
+					type="text" 
+					class="search-input" 
+					placeholder="Ingresa el nombre de tu municipio"
+					[(ngModel)]="searchTerm"
+					(input)="filterStores()"
+				/>
+				<button class="search-button" type="button">
+					<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+						<path d="M21 21L16.65 16.65M19 11C19 15.4183 15.4183 19 11 19C6.58172 19 3 15.4183 3 11C3 6.58172 6.58172 3 11 3C15.4183 3 19 6.58172 19 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+					</svg>
+				</button>
+			</div>
+		</fieldset>
+	</div>
+
+	<div class="container">
+	
+		@for (item of filteredStores; track $index) {
+		<article class="card">
+			<div class="card-header">
+				<h2 class="card-subtitle">{{ item.name }}</h2>
+				<span class="badge" [class]="{'bg-primary': this.openOrClose(item), 'bg-secundary': !this.openOrClose(item), }">
+					@if (this.openOrClose(item)) {
+					Abierto
+					} @else {
+					Cerrado
+					}
+				</span>
+			</div>
+			<div class="card-body">
+				<div class="cont-info-card">
+					<p class="horario-tienda">{{ item.address }}</p>
+					<div (click)="toggleCollapse($index)" class="accordion-button collapsed">
+						<p class="horario abierto">
+							<span class="arrow">
+								<img src="/arrow_our-stores.svg" alt="arrow">
+							</span>
+							<span class="icono">
+								<img src="/clock_our-stores.svg" alt="icono">
+							</span>
+							<i class="clock_our-stores">
+							</i>{{item.schedule[this.scheduleToday()] }}
+						</p>
+					</div>
+					<div class="collapse" [class.active]="activeIndex === $index" id="horariosAcordion5">
+						<ul class="list-horario">
+							@for (day of item.schedule; track $index) {
+							<li>{{ day }}</li>
+							}
+						</ul>
+					</div>
+				</div>
+				<div class="row d-flex">
+					<a class="btn-detail" href="https://www.alkosto.com/nuestra-compania/tiendas/bogota/calle-170"
+						title="ir a tienda Alkosto Calle 170">
+						<div class="btn-card">
+							Ver detalle
+						</div>
+					</a>
+					<a class="btn-detail"
+						[target]="'_blank'"
+						[rel]="'noopener'"
+						[href]="mapUrlFromAddress(item.address, item.name)"
+						title="Como llegar">
+						<div class="btn-card bl-d">
+							Cómo llegar
+						</div>
+					</a>
+				</div>
+			</div>
+		</article>
+		}
+	</div>
+</div>

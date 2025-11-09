@@ -1,0 +1,145 @@
+<header class="product-header">
+  <div class="product-header__main">
+    <div class="product-header__info">
+      <h1 class="product-header__title">{{ productData()?.nombre }}</h1>
+      <div class="product-header__meta">
+        <span class="product-header__code">Código: {{ productData()?.codigo }}</span>
+        <div class="product-header__rating">
+          <span class="product-header__stars" aria-hidden="true">★★★★★</span>
+          <span class="product-header__rating-text"
+            >(18 Opiniones) <strong>4.94</strong> / 5.00</span
+          >
+        </div>
+      </div>
+
+      <div class="product-header__badges">
+        <button class="badge badge--purple">Seguro Gratis ›</button>
+        <button class="badge badge--red">0% Interés Davivienda ›</button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section class="product-detail">
+  <div class="product-detail__gallery">
+    <div class="product-detail__thumbs" aria-hidden="false">
+      <button
+        class="thumb"
+        *ngFor="let t of thumbnails(); let i = index"
+        type="button"
+        (click)="selectImage(t)"
+        (mouseenter)="selectImage(t)"
+        [attr.aria-label]="'Imagen ' + (i + 1)"
+        [class.thumb--active]="t === mainImage()"
+      >
+        <img [src]="t" [alt]="'thumbnail ' + (i + 1)" />
+      </button>
+    </div>
+
+    <div class="product-detail__main-image">
+      <button
+        class="gallery-nav__btn gallery-nav__btn--prev"
+        (click)="prevImage()"
+        aria-label="Anterior"
+      >
+        ‹
+      </button>
+      <img [src]="mainImage()" alt="Imagen principal del producto" />
+      <button
+        class="gallery-nav__btn gallery-nav__btn--next"
+        (click)="nextImage()"
+        aria-label="Siguiente"
+      >
+        ›
+      </button>
+    </div>
+  </div>
+
+  <aside class="product-detail__card">
+    <div class="price-row__current">
+      <span class="price-row__currency">$</span>
+      <span class="price-row__amount">{{ price() | currency : 'COP' : 'symbol' : '1.0-0' }}</span>
+      <small class="price-row__today">Hoy</small>
+    </div>
+
+    <div class="options">
+      <div class="option-group">
+        <label class="option-group__label">{{ productData()?.descripcion }}</label>
+      </div>
+
+      <div class="option-group">
+        <label class="option-group__label">Color:</label>
+        <div class="colors">
+          <button
+            class="color"
+            (click)="selectColor('gris')"
+            [style.background]="'#d3d3d3'"
+            [class.color--active]="selectedColor() === 'gris'"
+            aria-label="gris"
+          ></button>
+          <button
+            class="color"
+            (click)="selectColor('negro')"
+            [style.background]="'#000'"
+            [class.color--active]="selectedColor() === 'negro'"
+            aria-label="negro"
+          ></button>
+          <button
+            class="color"
+            (click)="selectColor('purpura')"
+            [style.background]="'#7b1fa2'"
+            [class.color--active]="selectedColor() === 'purpura'"
+            aria-label="purpura"
+          ></button>
+          <button
+            class="color"
+            (click)="selectColor('verde')"
+            [style.background]="'#2e7d32'"
+            [class.color--active]="selectedColor() === 'verde'"
+            aria-label="verde"
+          ></button>
+        </div>
+      </div>
+    </div>
+
+    <div class="logistics">
+      <button class="logistics__item logistics__item--selected" type="button">
+        <img class="logistics__img" src="/img/envio_prod.png" alt="envío" />
+        <div class="logistics__text">
+          <div class="logistics__title">Envío a tu dirección</div>
+          <div class="logistics__sub">GRATIS</div>
+        </div>
+        <span class="logistics__check">✓</span>
+      </button>
+
+      <button class="logistics__item" type="button">
+        <img class="logistics__img" src="/img/recog_prod.png" alt="recoge" />
+        <div class="logistics__text">
+          <div class="logistics__title">Recoge en tienda</div>
+          <div class="logistics__sub">GRATIS</div>
+        </div>
+      </button>
+    </div>
+
+    <div class="purchase">
+      <label for="qty" class="visually-hidden">Cantidad</label>
+      <select
+        id="qty"
+        class="quantity"
+        [ngModel]="quantity()"
+        (ngModelChange)="quantity.set($event)"
+      >
+        <option [value]="1">1</option>
+        <option [value]="2">2</option>
+        <option [value]="3">3</option>
+      </select>
+
+      <button class="btn btn--primary btn--add" (click)="addToCart()">Agregar al carrito</button>
+    </div>
+
+    <div class="product-links">
+      <a href="#" class="link">♡ Favoritos</a>
+      <a href="#" class="link">Compartir</a>
+    </div>
+  </aside>
+</section>

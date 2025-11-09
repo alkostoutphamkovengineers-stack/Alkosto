@@ -1,0 +1,104 @@
+<section class="register">
+  <a class="back-link" href="#">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M15 6l-6 6l6 6"></path>
+      </g>
+    </svg>
+    Volver
+  </a>
+
+  <div class="grid">
+    <div class="left">
+      <h1>Crea tu cuenta completando los datos</h1>
+
+      <p class="helper">
+        Correo electrónico ingresado:<br />
+        <span class="email">{{ email }}</span>
+        <a class="modify" href="#" (click)="modifyEmail($event)">Modificar</a>
+      </p>
+    </div>
+
+    <div class="right">
+      <div class="form-card">
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+          <div class="form-field" [class.error-active]="controlInvalid('firstName')">
+            <input
+              type="text"
+              id="firstName"
+              name="firstName"
+              formControlName="firstName"
+              placeholder="Nombres"
+            />
+            <span class="error-message" *ngIf="controlInvalid('firstName')">
+              {{
+                registerForm.get('firstName')?.hasError('required')
+                  ? 'Los nombres son requeridos'
+                  : 'Ingresa al menos 2 caracteres'
+              }}
+            </span>
+          </div>
+
+          <div class="form-field" [class.error-active]="controlInvalid('lastName')">
+            <input
+              type="text"
+              id="lastName"
+              name="lastName"
+              formControlName="lastName"
+              placeholder="Apellidos"
+            />
+            <span class="error-message" *ngIf="controlInvalid('lastName')">
+              {{
+                registerForm.get('lastName')?.hasError('required')
+                  ? 'Los apellidos son requeridos'
+                  : 'Ingresa al menos 2 caracteres'
+              }}
+            </span>
+          </div>
+
+          <div class="form-field phone-field" [class.error-active]="controlInvalid('phone')">
+            <div class="phone-prefix">
+              <img src="co.svg" alt="Colombia" class="flag-icon" />
+              <span>+57</span>
+            </div>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              formControlName="phone"
+              placeholder="Teléfono celular"
+            />
+            <span></span>
+            <span class="error-message" *ngIf="controlInvalid('phone')">
+              {{
+                registerForm.get('phone')?.hasError('required')
+                  ? 'El teléfono es requerido'
+                  : 'Ingresa 10 dígitos numéricos'
+              }}
+            </span>
+          </div>
+
+          <div class="form-field checkbox-field" [class.error-active]="controlInvalid('terms')">
+            <input type="checkbox" id="terms" name="terms" formControlName="terms" />
+            <label for="terms">
+              He leído y acepto la
+              <a href="#" class="terms-link">Política de tratamiento de datos</a>
+              y los <a href="#" class="terms-link">Términos y condiciones</a>.
+            </label>
+            <span class="error-message" *ngIf="controlInvalid('terms')">
+              Debes aceptar la política de privacidad y los términos para continuar
+            </span>
+          </div>
+
+          <button class="button-primary" type="submit">Continuar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

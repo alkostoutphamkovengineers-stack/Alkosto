@@ -1,0 +1,116 @@
+<div class="shopping-cart-page">
+  <div class="container">
+    <h1 class="title">Carrito de compras</h1>
+    <h3 class="subtitle">Productos en el carrito: ({{ productCount }})</h3>
+
+    @if (productCount === 0) {
+    <div class="empty-area">
+      <div class="empty-alert" role="status" aria-live="polite">
+        <div class="alert-icon" aria-hidden="true">⚠️</div>
+        <div class="alert-body">Tu carrito de compras está vacío.</div>
+      </div>
+
+      <p class="help-text">
+        Puedes seleccionar un producto para seguir comprando<br />
+        O puedes volver al inicio para ver las últimas ofertas
+      </p>
+
+      <div class="actions">
+        <button class="btn-outline" type="button" (click)="continueShopping()">
+          Volver al inicio
+        </button>
+      </div>
+    </div>
+    }
+
+    <!-- Filled cart -->
+    @if (productCount > 0) {
+    <div class="shopping-cart-grid">
+      <div class="cart-list">
+        @for (item of cart().productos; track $index) {
+        <div class="product-card">
+          <div class="product-left">
+            <img
+              class="product-thumb"
+              src="{{ item.producto.imagen }}"
+              alt="{{ item.producto.nombre }}"
+            />
+          </div>
+          <div class="product-center">
+            @if (item.producto.codigo) {
+            <div class="product-sku">Código: {{ item.producto.codigo }}</div>
+            }
+            <div class="product-title">{{ item.producto.nombre }}</div>
+            <div class="product-attrs">Tamaño: 128 GB, Color: BLANCO</div>
+            <a class="remove-link" (click)="remove(item)">🗑️ Eliminar</a>
+          </div>
+
+          <div class="product-right">
+            <div class="shipping">
+              <div class="small">Método de envío</div>
+              <div class="shipping-options">
+                <label class="ship-option">
+                  <input type="radio" name="ship-{{ item.id }}" checked />
+                  <span class="ship-label">Envío gratis</span>
+                </label>
+                <label class="ship-option">
+                  <input type="radio" name="ship-{{ item.id }}" />
+                  <span class="ship-label">Recoge en tienda</span>
+                </label>
+              </div>
+            </div>
+
+            <div class="price-block">
+              @if (item.producto.precioBase) {
+              <div class="old-price">
+                {{ item.producto.precioBase * 1.36 | currency : 'COP' : 'symbol' : '1.0-0' }}
+              </div>
+              <div class="price">
+                {{ item.producto.precioBase | currency : 'COP' : 'symbol' : '1.0-0' }}
+                <div class="price-note">Hoy</div>
+              </div>
+              <div class="payment-info">Para pagos con Tarjeta Alkosto · Crédito Fácil CODENSA</div>
+              } @else {
+              <div class="price">{{ 0 | currency : 'COP' : 'symbol' : '1.0-0' }}</div>
+              }
+            </div>
+
+            <div class="qty-block">
+              <label class="small">Cantidad:</label>
+              <select class="qty-select" (change)="changeQuantity(item, $any($event.target).value)">
+                @for (q of [1,2,3,4,5,6,7,8,9,10]; track $index) {
+                <option [value]="q" [selected]="q === item.amount">{{ q }}</option>
+                }
+              </select>
+            </div>
+          </div>
+        </div>
+        }
+
+        <div class="more-link" routerLink="/">&lt; Ver más productos</div>
+      </div>
+
+      <aside class="cart-sidebar">
+        <div class="summary">
+          <h4>Mi carrito</h4>
+          <div class="row">
+            <span>Subtotal ({{ productCount }} productos)</span
+            ><span class="muted">{{ subtotal | currency : 'COP' : 'symbol' : '1.0-0' }}</span>
+          </div>
+          <div class="row"><span>Entrega</span><span class="muted">Gratis</span></div>
+          <div class="row discount">
+            <span>Descuentos</span
+            ><span class="muted">-{{ discounts | currency : 'COP' : 'symbol' : '1.0-0' }}</span>
+          </div>
+          <div class="row total">
+            <span>Total a pagar</span
+            ><span class="total-amount">{{ total | currency : 'COP' : 'symbol' : '1.0-0' }}</span>
+          </div>
+
+          <button class="btn-primary" (click)="goToCheckout()">Ir a pagar</button>
+        </div>
+      </aside>
+    </div>
+    }
+  </div>
+</div>

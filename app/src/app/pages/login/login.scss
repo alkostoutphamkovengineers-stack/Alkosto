@@ -1,0 +1,139 @@
+/* Login page styles modeled after email-verification/my-profile */
+.login-page {
+  --orange: #eb5b25;
+  --text: #333;
+  --muted: #6b6b6b;
+  max-width: 1180px;
+  margin: 0 auto;
+  padding: 28px 24px 64px;
+
+  .back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--orange);
+    text-decoration: none;
+    font-weight: 500;
+    margin-left: 8px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+      display: block;
+    }
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 420px;
+    gap: 40px;
+    align-items: start;
+    margin-top: 18px;
+  }
+
+  .left {
+    padding-left: 56px;
+
+    h1 {
+      font-size: 32px;
+      margin: 0 0 12px;
+      color: var(--text);
+    }
+    .helper {
+      color: var(--muted);
+      margin: 0 0 6px;
+    }
+    .email {
+      font-weight: 600;
+      margin: 0 0 6px;
+    }
+    .modify {
+      color: var(--orange);
+      text-decoration: underline;
+      font-size: 14px;
+    }
+  }
+
+  .right {
+    .form-card {
+      border: 1px solid #e6e6e6;
+      border-radius: 6px;
+      padding: 20px;
+      background: #fff;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      .form-field input {
+        width: 100%;
+        padding: 12px 14px;
+        border: 1px solid #e6e6e6;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .field-error {
+        color: #d23;
+        font-size: 13px;
+        margin-top: 6px;
+      }
+
+      .form-error {
+        color: #d23;
+        font-size: 13px;
+        margin-top: 8px;
+      }
+
+      .button-primary {
+        background: var(--orange);
+        color: #fff;
+        padding: 14px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 700;
+        cursor: pointer;
+      }
+
+      .help-box {
+        margin-top: 18px;
+        background: #f6f6f6;
+        padding: 16px;
+        border-radius: 4px;
+
+        h4 {
+          margin: 0 0 8px;
+          font-size: 14px;
+          color: #333;
+        }
+        ul {
+          margin: 0;
+          padding: 0;
+          list-style: none;
+        }
+        li {
+          margin-bottom: 8px;
+        }
+        a {
+          color: var(--orange);
+          text-decoration: underline;
+        }
+      }
+    }
+  }
+
+  @media (max-width: 900px) {
+    .grid {
+      grid-template-columns: 1fr;
+    }
+    .left {
+      padding-left: 16px;
+      margin-bottom: 16px;
+    }
+    .right {
+      padding: 0 16px;
+    }
+  }
+}

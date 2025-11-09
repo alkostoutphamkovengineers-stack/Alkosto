@@ -1,0 +1,53 @@
+@if (refResource.isLoading()) {
+<div class="loading-state">
+  <div class="loading-card">
+    <div class="loader" aria-hidden="true"></div>
+    <div class="loading-copy">
+      <h3>Cargando productos</h3>
+      <p>Estamos obteniendo las mejores ofertas para ti. Esto no debería tomar mucho tiempo.</p>
+    </div>
+  </div>
+</div>
+} @if (refResource.error()) {
+<div class="error-state">
+  <div class="error-card">
+    <div class="error-icon">⚠️</div>
+    <div class="error-copy">
+      <h3>No pudimos cargar los productos</h3>
+      <p>Ocurrió un error al obtener los datos. Revisa tu conexión o intenta recargar la página.</p>
+      <div class="error-actions">
+        <button class="btn-retry" onclick="location.reload()">Reintentar</button>
+      </div>
+    </div>
+  </div>
+</div>
+}
+<div class="content">
+  @if (refResource.value()) { @for (item of productsData(); track $index) {
+
+  <a class="x">
+    <div class="product-card detailed">
+      <div class="product-card__left" (click)="viewDetail(item.id)">
+        <div class="brand-tag">{{ item.marca.nombre }}</div>
+        <div class="product-card__media">
+          <img [src]="item.imagen" [alt]="item.marca.nombre" />
+        </div>
+      </div>
+      <div class="y" (click)="viewDetail(item.id)">
+        <h4 class="product-title">{{ item.nombre }}</h4>
+        <p class="rating">4.9 <span class="stars">★★★★★</span> <small>(18)</small></p>
+      </div>
+      <div class="product-card__right">
+        <div class="price-block">
+          <div class="final-price">
+            {{ item.precioBase | currency : 'COP' : 'symbol' : '1.0-0' }}
+          </div>
+        </div>
+        <button class="cart-btn">
+          <img src="/img/carrito_cat.png" alt="carrito" (click)="addProductToCard(item)" />
+        </button>
+      </div>
+    </div>
+  </a>
+  } }
+</div>

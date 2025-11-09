@@ -1,0 +1,78 @@
+<section class="email-login login-page">
+  <a class="back-link" routerLink="/" title="Volver">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M15 6l-6 6l6 6"></path>
+      </g>
+    </svg>
+    Volver
+  </a>
+
+  <div class="grid">
+    <div class="left">
+      <h1>Ingresa tu contraseña</h1>
+
+      <p class="helper">
+        Estás ingresando con:
+        <span class="email">{{ email }}</span>
+        <br />
+        <a class="modify" href="/emailVerification" (click)="modifyEmail()">Modificar</a>
+      </p>
+    </div>
+
+    <div class="right">
+      <div class="form-card">
+        <form [formGroup]="passwordForm" (ngSubmit)="onSubmit()">
+          <div class="form-field">
+            <input
+              type="password"
+              placeholder="Contraseña"
+              formControlName="password"
+              [class.invalid]="
+                passwordForm.get('password')?.invalid && passwordForm.get('password')?.touched
+              "
+            />
+            <div
+              class="field-error"
+              [hidden]="
+                !(
+                  passwordForm.get('password')?.touched &&
+                  passwordForm.get('password')?.hasError('required')
+                )
+              "
+            >
+              La contraseña es requerida.
+            </div>
+            <!-- Mensaje de error general (credenciales inválidas / servidor) -->
+            <div class="form-error" *ngIf="errorMessage()">{{ errorMessage() }}</div>
+          </div>
+
+          <button
+            class="button-primary"
+            type="submit"
+            [disabled]="passwordForm.invalid || submitting()"
+          >
+            Continuar
+          </button>
+        </form>
+
+        <div class="help-box">
+          <h4>Tengo problemas para ingresar</h4>
+          <ul>
+            <li>
+              <a routerLink="/login/options" (click)="changeMethod()"
+                >Probar otro método para ingresar</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

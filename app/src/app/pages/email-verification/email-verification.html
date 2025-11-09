@@ -1,0 +1,61 @@
+<section class="email-login">
+  <a class="back-link" href="#">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <g
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+      >
+        <path d="M15 6l-6 6l6 6"></path>
+      </g>
+    </svg>
+    Volver
+  </a>
+
+  <div class="grid">
+    <div class="left">
+      <h1>Ingresa tu correo electrónico</h1>
+
+      <p class="helper">
+        Al ingresar utilizaremos tus datos para mejorar la experiencia en nuestro sitio.
+      </p>
+    </div>
+
+    <div class="right">
+      <div class="form-card">
+        <form [formGroup]="emailForm" (ngSubmit)="onSubmit()">
+          <div class="form-field">
+            <label for="email">Correo electrónico</label>
+            <div class="input-wrapper">
+              <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                formControlName="email"
+                (input)="onEmailInput()"
+              />
+              <button type="button" class="clear-btn" aria-label="Limpiar" (click)="clearEmail()">
+                <svg viewBox="0 0 24 24" aria-hidden="true">
+                  <g
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  >
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M15 9l-6 6M9 9l6 6"></path>
+                  </g>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <button class="button-primary" type="submit">Continuar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>

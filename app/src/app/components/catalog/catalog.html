@@ -1,0 +1,219 @@
+<div class="second-container">
+  <div class="second-center-container">
+    <!-- Overlay shown when menu is open -->
+    <div
+      class="catalog-overlay"
+      [class.show]="menuOpen"
+      (click)="closeMenu()"
+      [attr.aria-hidden]="!menuOpen"
+    ></div>
+
+    <ul class="menu">
+      <!-- Tecnología dropdown (opens on click) -->
+      <li id="tech-dropdown" class="dropdown" [class.active]="menuOpen">
+        <a
+          href="#"
+          (click)="toggleMenu($event)"
+          aria-controls="tech-panel"
+          [attr.aria-expanded]="menuOpen"
+          >Tecnología</a
+        >
+
+        <div
+          id="tech-panel"
+          class="dropdown-menu"
+          role="menu"
+          aria-labelledby="tech-dropdown"
+          [attr.aria-hidden]="!menuOpen"
+          [class.active]="menuOpen"
+        >
+          <div class="menu-left">
+            <ul>
+              <li
+                (click)="selectCategory('Celulares')"
+                [class.active]="selectedCategory === 'Celulares'"
+              >
+                Celulares
+              </li>
+              <li
+                (click)="selectCategory('Computadores')"
+                [class.active]="selectedCategory === 'Computadores'"
+              >
+                Computadores
+              </li>
+              <li
+                (click)="selectCategory('Televisores')"
+                [class.active]="selectedCategory === 'Televisores'"
+              >
+                Televisores
+              </li>
+              <li
+                (click)="selectCategory('Accesorios de tecnología')"
+                [class.active]="selectedCategory === 'Accesorios de tecnología'"
+              >
+                Accesorios de tecnología
+              </li>
+              <li (click)="selectCategory('Audio')" [class.active]="selectedCategory === 'Audio'">
+                Audio
+              </li>
+              <li
+                (click)="selectCategory('Consolas y videojuegos')"
+                [class.active]="selectedCategory === 'Consolas y videojuegos'"
+              >
+                Consolas y videojuegos
+              </li>
+              <li
+                (click)="selectCategory('Cámaras')"
+                [class.active]="selectedCategory === 'Cámaras'"
+              >
+                Cámaras
+              </li>
+              <li
+                (click)="selectCategory('Casa inteligente')"
+                [class.active]="selectedCategory === 'Casa inteligente'"
+              >
+                Casa inteligente
+              </li>
+              <li
+                (click)="selectCategory('Impresoras')"
+                [class.active]="selectedCategory === 'Impresoras'"
+              >
+                Impresoras
+              </li>
+              <li
+                (click)="selectCategory('Monitores')"
+                [class.active]="selectedCategory === 'Monitores'"
+              >
+                Monitores
+              </li>
+              <li
+                (click)="selectCategory('Proyectores')"
+                [class.active]="selectedCategory === 'Proyectores'"
+              >
+                Proyectores
+              </li>
+              <li
+                (click)="selectCategory('Smartwatch')"
+                [class.active]="selectedCategory === 'Smartwatch'"
+              >
+                Smartwatch
+              </li>
+              <li
+                (click)="selectCategory('Tablets')"
+                [class.active]="selectedCategory === 'Tablets'"
+              >
+                Tablets
+              </li>
+            </ul>
+          </div>
+
+          <div class="menu-right">
+            @if (selectedCategory === 'Celulares') {
+            <div class="menu-right-header">
+              <div>
+                <h3>{{ selectedCategory }}</h3>
+                <a class="ver-todo" (click)="redirectToCategory(2)">Ver todo →</a>
+              </div>
+              <button class="close-btn" aria-label="Cerrar submenú" (click)="closeMenu()">×</button>
+            </div>
+            <p class="subtitle">Marca</p>
+            <div class="brands">
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(2, 1)">
+                <img src="img/brands/apple.png" alt="Apple" /><span>Apple</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(2, 2)">
+                <img src="img/brands/samsung.png" alt="Samsung" /><span>Samsung</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(2, 3)">
+                <img src="img/brands/motorola.png" alt="Motorola" /><span>Motorola</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(2, 4)">
+                <img src="img/brands/honor.png" alt="Honor" /><span>Honor</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(2, 5)">
+                <img src="img/brands/xiaomi.png" alt="Xiaomi" /><span>Xiaomi</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(2, 6)">
+                <img src="img/brands/huawei.png" alt="Huawei" /><span>Huawei</span>
+              </div>
+            </div>
+            } @else if (selectedCategory === 'Computadores') {
+            <div class="menu-right-header">
+              <div>
+                <h3>{{ selectedCategory }}</h3>
+                <a class="ver-todo" (click)="redirectToCategory(3)">Ver todo →</a>
+              </div>
+              <button class="close-btn" aria-label="Cerrar submenú" (click)="closeMenu()">×</button>
+            </div>
+            <p class="subtitle">Marca</p>
+            <div class="brands" (click)="redirectToCategoryAndBrand(3, 7)">
+              <div class="brand-item"><img src="img/brands/hp.webp" alt="HP" /><span>HP</span></div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(3, 8)">
+                <img src="img/brands/lenovo.webp" alt="Lenovo" /><span>Lenovo</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(3, 1)">
+                <img src="img/brands/apple.png" alt="Apple" /><span>Apple</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(3, 9)">
+                <img src="img/brands/asus.webp" alt="Asus" /><span>Asus</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(3, 10)">
+                <img src="img/brands/acer.webp" alt="Acer" /><span>Acer</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(3, 11)">
+                <img src="img/brands/msi.webp" alt="MSI" /><span>MSI</span>
+              </div>
+            </div>
+            } @else if (selectedCategory === 'Televisores') {
+            <div class="menu-right-header">
+              <div>
+                <h3>{{ selectedCategory }}</h3>
+                <a class="ver-todo" (click)="redirectToCategory(4)">Ver todo →</a>
+              </div>
+              <button class="close-btn" aria-label="Cerrar submenú" (click)="closeMenu()">×</button>
+            </div>
+            <p class="subtitle">Marca</p>
+            <div class="brands">
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(4, 2)">
+                <img src="img/brands/samsung.png" alt="Samsung" /><span>Samsung</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(4, 12)">
+                <img src="img/brands/lg.webp" alt="LG" /><span>LG</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(4, 13)">
+                <img src="img/brands/tcl.png" alt="TCL" /><span>TCL</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(4, 14)">
+                <img src="img/brands/kalley.png" alt="Kalley" /><span>Kalley</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(4, 15)">
+                <img src="img/brands/hyundai.webp" alt="Hyundai" /><span>Hyundai</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(4, 17)">
+                <img src="img/brands/challenger.webp" alt="Challenger" /><span>Challenger</span>
+              </div>
+              <div class="brand-item" (click)="redirectToCategoryAndBrand(4, 16)">
+                <img src="img/brands/panasonic.webp" alt="Panasonnic" /><span>Panasonnic</span>
+              </div>
+            </div>
+            } @else {
+            <p class="subtitle">{{ selectedCategory }}</p>
+            <p>
+              Contenido para <strong>{{ selectedCategory }}</strong> próximamente.
+            </p>
+            }
+          </div>
+        </div>
+      </li>
+      <li><a>Electrodomésticos</a></li>
+      <li><a>Llantas y vehículos</a></li>
+      <li><a>Muebles y colchones</a></li>
+      <li><a>Hogar</a></li>
+      <li><a>Juguetes</a></li>
+      <li><a>Deportes</a></li>
+      <li><a>Pines</a></li>
+      <li><a>Ropa Gildan</a></li>
+      <li><a>Mercado</a></li>
+    </ul>
+  </div>
+</div>
