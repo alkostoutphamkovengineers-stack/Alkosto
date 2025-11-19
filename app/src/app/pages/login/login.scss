@@ -75,6 +75,35 @@
         font-size: 14px;
       }
 
+      .input-with-toggle {
+        position: relative;
+
+        input {
+          padding-right: 44px;
+        }
+
+        .toggle-visibility {
+          position: absolute;
+          right: 8px;
+          top: 50%;
+          transform: translateY(-50%);
+          background: transparent;
+          border: none;
+          cursor: pointer;
+          padding: 6px;
+          color: var(--muted);
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+
+          svg {
+            width: 20px;
+            height: 20px;
+            display: block;
+          }
+        }
+      }
+
       .field-error {
         color: #d23;
         font-size: 13px;

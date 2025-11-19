@@ -15,6 +15,7 @@ export class Login {
   protected passwordForm: FormGroup;
   protected submitting = signal(false);
   protected errorMessage = signal('');
+  protected showPassword = signal(false);
   protected email: string = '';
 
   constructor(
@@ -32,6 +33,11 @@ export class Login {
       (nav && nav.extras && (nav.extras as any).state?.email) ||
       localStorage.getItem('userEmail') ||
       loginState.userEmail();
+  }
+
+  protected toggleShowPassword(event: Event) {
+    event.preventDefault();
+    this.showPassword.set(!this.showPassword());
   }
 
   protected modifyEmail() {
