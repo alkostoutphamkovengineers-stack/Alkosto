@@ -32,16 +32,23 @@ export class Catalog {
   }
 
   protected redirectToCategory(categoryId: number) {
-    this.router.navigate(['/search-view'], {
-      state: { categoryId: categoryId, userExists: false },
-    });
-    this.closeMenu();
+    const state = { categoryId, userExists: false };
+    this.navigateToSearchWithState(state);
   }
 
   protected redirectToCategoryAndBrand(categoryId: number, brandId: number) {
-    this.router.navigate(['/search-view'], {
-      state: { categoryId: categoryId, brandId: brandId, userExists: false },
-    });
-    this.closeMenu();
+    const state = { categoryId, brandId, userExists: false };
+    this.navigateToSearchWithState(state);
+  }
+
+  private navigateToSearchWithState(state: any): void {
+    if (this.router.url.startsWith('/search-view')) {
+      this.router
+        .navigateByUrl('/', { skipLocationChange: true })
+        .then(() => this.router.navigate(['/search-view'], { state }))
+        .finally(() => this.closeMenu());
+    } else {
+      this.router.navigate(['/search-view'], { state }).finally(() => this.closeMenu());
+    }
   }
 }
