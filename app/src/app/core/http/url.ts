@@ -1,1 +1,1 @@
-export const BASEURL = 'https://unemployed-fredi-hamkov-76c3ff1b.koyeb.app';
+export const BASEURL = 'https://sound-janean-hamkov-new-ca52e013.koyeb.app';
