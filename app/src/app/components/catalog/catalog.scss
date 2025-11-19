@@ -295,3 +295,72 @@ body.catalog-menu-open {
   pointer-events: auto;
   display: flex !important;
 }
+
+.dropdown-menu {
+  .close-btn {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: transparent;
+    color: #06376f;
+    border: none;
+    box-shadow: none;
+    font-size: 18px;
+    line-height: 1;
+    cursor: pointer;
+    padding: 0;
+    transition: transform 0.12s ease, color 0.12s ease;
+    z-index: 1200000;
+
+    /* solo la "x" recibe estilos: color y transform */
+    &:hover {
+      transform: translateY(-2px);
+      color: #d44b00;
+      background: transparent;
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+
+    &:focus {
+      outline: none;
+      /* foco sutil alrededor de la x (sin fondo) */
+      box-shadow: 0 0 0 3px rgba(6, 55, 111, 0.08);
+    }
+
+    /* optional smaller variant */
+    &.small {
+      width: 32px;
+      height: 32px;
+      font-size: 16px;
+    }
+  }
+}
+
+@media (max-width: 600px) {
+  .dropdown-menu {
+    .close-btn {
+      top: 10px;
+      right: 12px;
+      background: transparent;
+      color: #eb5b25; /* mantenemos color destacado para la X en móvil */
+      width: 40px;
+      height: 40px;
+      font-size: 20px;
+      border: none;
+      box-shadow: none;
+
+      &:hover {
+        color: #cf4a1a;
+        background: transparent;
+      }
+    }
+  }
+}
