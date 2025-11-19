@@ -1,4 +1,4 @@
-import { Component, HostListener, ElementRef, ViewChild, signal, computed } from '@angular/core';
+import { Component, HostListener, ElementRef, ViewChild, signal, computed, OnDestroy } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { Router } from '@angular/router';
 import { httpResource } from '@angular/common/http';
@@ -24,6 +24,9 @@ export class Search {
 
   @ViewChild('searchInput', { static: false }) searchInputRef!: ElementRef<HTMLInputElement>;
 
+  private previousBodyOverflow = '';
+  private bodyScrollDisabled = false;
+
   protected searchQuery = signal('');
   protected refSearch = httpResource<Product[]>(() => {
     const q = this.searchQuery().trim();
@@ -39,12 +42,47 @@ export class Search {
   constructor(private readonly router: Router) {}
 
   onFocus() {
+    this.openSearch();
+  }
+
+  ngOnDestroy(): void {
+    this.enableBodyScroll();
+  }
+
+  private openSearch() {
     this.isOpen = true;
+    this.disableBodyScroll();
+  }
+
+  private closeSearch() {
+    this.isOpen = false;
+    this.enableBodyScroll();
+  }
+
+  private disableBodyScroll() {
+    if (this.bodyScrollDisabled) return;
+    try {
+      this.previousBodyOverflow = document.body.style.overflow || '';
+      document.body.style.overflow = 'hidden';
+      this.bodyScrollDisabled = true;
+    } catch (err) {
+      // ignore (server-side rendering or restricted env)
+    }
+  }
+
+  private enableBodyScroll() {
+    if (!this.bodyScrollDisabled) return;
+    try {
+      document.body.style.overflow = this.previousBodyOverflow || '';
+      this.bodyScrollDisabled = false;
+    } catch (err) {
+      // ignore
+    }
   }
 
   selectSuggestion(s: string) {
     this.searchQuery.set(s);
-    this.isOpen = false;
+    this.closeSearch();
     if (this.searchInputRef && this.searchInputRef.nativeElement) {
       this.searchInputRef.nativeElement.value = s;
     }
@@ -78,7 +116,7 @@ export class Search {
       queryParams: { productName: q },
     });
 
-    this.isOpen = false;
+    this.closeSearch();
     // Clear the search field after redirect (clean UX)
     this.searchQuery.set('');
     if (this.searchInputRef && this.searchInputRef.nativeElement) {
@@ -95,7 +133,7 @@ export class Search {
     this.router.navigate(['/details-view'], {
       state: { productId: productId, userExists: false },
     });
-    this.isOpen = false;
+    this.closeSearch();
   }
 
   @HostListener('document:click', ['$event'])
@@ -104,7 +142,7 @@ export class Search {
     const form = document.querySelector('.search-form');
     if (!form) return;
     if (!form.contains(target)) {
-      this.isOpen = false;
+      this.closeSearch();
     }
   }
 }
