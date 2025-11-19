@@ -29,8 +29,22 @@ export class Register {
     }
 
     this.registerForm = this.fb.group({
-      firstName: ['', [Validators.required, Validators.minLength(2)]],
-      lastName: ['', [Validators.required, Validators.minLength(2)]],
+      firstName: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/),
+      ],
+      ],
+      lastName: [
+      '',
+      [
+        Validators.required,
+        Validators.minLength(2),
+        Validators.pattern(/^[A-Za-zÀ-ÖØ-öø-ÿ\s]+$/),
+      ],
+      ],
       phone: ['', [Validators.required, Validators.pattern(/^[0-9]{10}$/)]],
       terms: [false, [Validators.requiredTrue]],
     });

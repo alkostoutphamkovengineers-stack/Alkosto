@@ -36,12 +36,14 @@
               formControlName="firstName"
               placeholder="Nombres"
             />
-            <span class="error-message" *ngIf="controlInvalid('firstName')">
-              {{
-                registerForm.get('firstName')?.hasError('required')
-                  ? 'Los nombres son requeridos'
-                  : 'Ingresa al menos 2 caracteres'
-              }}
+            <span class="error-message" *ngIf="registerForm.get('firstName')?.hasError('required')">
+              Los nombres son requeridos
+            </span>
+            <span class="error-message" *ngIf="registerForm.get('firstName')?.hasError('minlength')">
+              Ingresa al menos 2 caracteres
+            </span>
+            <span class="error-message" *ngIf="registerForm.get('firstName')?.hasError('pattern')">
+              Solo se permiten letras y espacios (sin caracteres especiales ni números)
             </span>
           </div>
 
@@ -53,12 +55,14 @@
               formControlName="lastName"
               placeholder="Apellidos"
             />
-            <span class="error-message" *ngIf="controlInvalid('lastName')">
-              {{
-                registerForm.get('lastName')?.hasError('required')
-                  ? 'Los apellidos son requeridos'
-                  : 'Ingresa al menos 2 caracteres'
-              }}
+            <span class="error-message" *ngIf="registerForm.get('lastName')?.hasError('required')">
+              Los apellidos son requeridos
+            </span>
+            <span class="error-message" *ngIf="registerForm.get('lastName')?.hasError('minlength')">
+              Ingresa al menos 2 caracteres
+            </span>
+            <span class="error-message" *ngIf="registerForm.get('lastName')?.hasError('pattern')">
+              Solo se permiten letras y espacios (sin caracteres especiales ni números)
             </span>
           </div>
 
