@@ -98,7 +98,7 @@ export class DetailsView {
       return;
     }
 
-    this.shoppingCart.addProduct(Number(localStorage.getItem('id')), item.id, 1).subscribe({
+    this.shoppingCart.addProduct(Number(localStorage.getItem('id')), item.id, this.quantity()).subscribe({
       next: () => {
         this.shoppingCart.refreshCount(Number(localStorage.getItem('id')));
       },
