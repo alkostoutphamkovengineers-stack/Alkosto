@@ -39,6 +39,9 @@
       </div>
       <div class="product-card__right">
         <div class="price-block">
+          <div class="original-price">
+            {{ (item.precioBase * 1.35) | currency : 'COP' : 'symbol' : '1.0-0' }}
+          </div>
           <div class="final-price">
             {{ item.precioBase | currency : 'COP' : 'symbol' : '1.0-0' }}
           </div>
