@@ -65,6 +65,59 @@
   font-size: 13px;
 }
 
+/* Price range filter styles */
+.price-ranges {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.price-ranges li {
+  margin: 0;
+}
+.price-ranges label {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  transition: background 150ms ease, border-color 150ms ease, color 150ms ease;
+  color: #444;
+  font-size: 14px;
+}
+.price-ranges label:hover {
+  background: #fbfbfc;
+  border-color: #eee;
+}
+.price-ranges input[type="radio"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--alk-line);
+  border-radius: 50%;
+  display: inline-block;
+  flex: 0 0 18px;
+  position: relative;
+}
+.price-ranges input[type="radio"]:checked {
+  border-color: var(--alk-blue);
+  box-shadow: inset 0 0 0 6px var(--alk-blue);
+}
+/* modern browsers: style label when its input is checked */
+@supports (selector(:has(*))) {
+  .price-ranges label:has(input:checked) {
+    background: rgba(11, 87, 164, 0.06);
+    border-color: rgba(11, 87, 164, 0.12);
+    color: var(--alk-blue);
+  }
+}
+
+
 .see-more {
   display: block;
   color: #d35400;
@@ -176,22 +229,17 @@
   position: relative;
 }
 .price-bubble {
-  background: #fff;
-  border: 3px solid #0b57a4;
-  border-radius: 40px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
   padding: 4px 12px;
   text-align: center;
-  min-width: 110px;
+    
   box-shadow: 0 2px 0 rgba(11, 87, 164, 0.08);
-  position: relative;
-  z-index: 4;
-  display: inline-block;
-  margin-right: 6px;
-  transform: translateX(-72px) translateY(-6px);
-}
-.price-bubble .before {
-  display: block;
-  text-decoration: line-through;
+    
   color: #666;
   font-size: 10px;
 }
