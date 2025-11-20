@@ -41,11 +41,25 @@ export class CodeAlert {
     this.messageVerification.set(method === 'email' ? 'correo' : 'número de celular');
     this.userAuthMethodAddress.set(
       method === 'email'
-        ? localStorage.getItem('userEmail') || ''
-        : `+57${(localStorage.getItem('userPhoneNumber') || '')
+      ? (localStorage.getItem('userEmail') || '')
+        .split('@')
+        .map((value, idx) => {
+          if (idx === 0) {
+          const len = value.length;
+          const maskCount = Math.ceil(len * 0.8);
+          const visibleCount = Math.max(0, len - maskCount);
+          return value
             .split('')
-            .map((char, idx) => (idx === 3 || idx === 4 || idx === 5 ? '*' : char))
-            .join('')}`
+            .map((char, i) => (i >= visibleCount ? '*' : char))
+            .join('');
+          }
+          return value;
+        })
+        .join('@')
+      : `+57${(localStorage.getItem('userPhoneNumber') || '')
+        .split('')
+        .map((char, idx) => (idx === 3 || idx === 4 || idx === 5 ? '*' : char))
+        .join('')}`
     );
 
     this.isOpen.set(true);
